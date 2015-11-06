@@ -55,7 +55,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'auto-pairs'
-Plugin 'YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'STL-Syntax'
 Plugin 'the-NERD-Commenter'
