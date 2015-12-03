@@ -456,6 +456,9 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+map <c-[> :vertical resize-3<CR>
+map <c-]> :vertical resize+3<CR>
+
 
 "python syntax strengthen
 let python_highlight_all = 1
