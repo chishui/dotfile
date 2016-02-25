@@ -55,7 +55,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'auto-pairs'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'STL-Syntax'
 Plugin 'the-NERD-Commenter'
@@ -456,9 +456,6 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-map <c-[> :vertical resize-3<CR>
-map <c-]> :vertical resize+3<CR>
-
 
 "python syntax strengthen
 let python_highlight_all = 1
@@ -470,6 +467,9 @@ let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
 "set error or warning signs
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+
+map <C-K> :pyf ~/.vim/clang-format.py<cr>
+imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<cr>
 
 "the nerd commenter
 "<leader>cc
