@@ -60,6 +60,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'STL-Syntax'
 Plugin 'the-NERD-Commenter'
 Plugin 'the-nerd-tree'
+Plugin 'tagbar'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -194,6 +195,8 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -470,6 +473,8 @@ let g:syntastic_warning_symbol = '⚠'
 
 map <C-K> :pyf ~/.vim/clang-format.py<cr>
 imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<cr>
+
+nmap <F10> :TagbarToggle<CR>
 
 "the nerd commenter
 "<leader>cc
