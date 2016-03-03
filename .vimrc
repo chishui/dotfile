@@ -61,6 +61,7 @@ Plugin 'STL-Syntax'
 Plugin 'the-NERD-Commenter'
 Plugin 'the-nerd-tree'
 Plugin 'tagbar'
+Plugin 'vim-airline'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -475,6 +476,10 @@ map <C-K> :pyf ~/.vim/clang-format.py<cr>
 imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<cr>
 
 nmap <F10> :TagbarToggle<CR>
+
+" vim-airline
+let g:airline_section_b = '%{getcwd()}'
+let g:airline_section_y = '%{strftime("%T")}'
 
 "the nerd commenter
 "<leader>cc
