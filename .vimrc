@@ -62,6 +62,12 @@ Plugin 'the-NERD-Commenter'
 Plugin 'the-nerd-tree'
 Plugin 'tagbar'
 Plugin 'vim-airline'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+"Plugin 'wookiehangover/jshint.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'ternjs/tern_for_vim'
+Plugin 'myhere/vim-nodejs-complete'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -78,6 +84,10 @@ filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
+
+" Set Relative Number
+set relativenumber
+
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -473,14 +483,14 @@ let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 
 " clang-format
-map <C-K> :pyf ~/.vim/clang-format.py<cr>
-imap <C-K> <c-o>:pyf ~/.vim/clang-format.py<cr>
+execute "set <M-k>=˚"
+map <M-k> :pyf ~/.vim/clang-format.py<cr>
 
 " tagbar
 nmap <F10> :TagbarToggle<CR>
 
 " vim-airline
-let g:airline_section_b = '%{getcwd()}'
+"let g:airline_section_b = '%{getcwd()}'
 let g:airline_section_y = '%{strftime("%T")}'
 
 " a.vim
@@ -492,4 +502,13 @@ map <M-o> :A<CR>
 "<leader>cn
 
 "my custom
+noremap <leader>nn :vertical resize-3<CR>
+noremap <leader>mm :vertical resize+3<CR>
+" enter key can change line
+"nnoremap <CR> i<CR><ESC>
+:imap jj <Esc>
 
+" press space in normal mode to insert a blank space 
+:nnoremap <Space> i<Space><Esc>
+
+autocmd CompleteDone * pclose
