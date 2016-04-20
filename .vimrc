@@ -46,6 +46,18 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set cursorline
+highlight CursorLine cterm=bold ctermbg=darkblue ctermfg=none guibg=darkred guifg=white
+
+set autoread
+"ad
+
+set hidden
+
+"set mouse=a
+
+set synmaxcol=512                     " don't syntax highlight long lines
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -68,6 +80,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-surround'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'myhere/vim-nodejs-complete'
+Plugin 'tpope/vim-repeat'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -380,6 +393,10 @@ function! CmdLine(str)
     unmenu Foo
 endfunction
 
+function! SetCursorLine()
+    highlight CursorLine cterm=bold ctermbg=darkblue ctermfg=none guibg=darkred guifg=white
+endfunction
+call SetCursorLine()
 function! VisualSelection(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
