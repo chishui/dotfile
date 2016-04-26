@@ -172,7 +172,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 set background=dark
-colorscheme Chasing_Logic
+colorscheme rainbow_fine_blue "Chasing_Logic
 set t_Co=256
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -394,7 +394,7 @@ function! CmdLine(str)
 endfunction
 
 function! SetCursorLine()
-    highlight CursorLine cterm=bold ctermbg=darkblue ctermfg=none guibg=darkred guifg=white
+    highlight CursorLine cterm=bold ctermbg=darkgray ctermfg=none guibg=darkred guifg=white
 endfunction
 call SetCursorLine()
 function! VisualSelection(direction) range
