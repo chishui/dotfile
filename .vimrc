@@ -67,7 +67,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'auto-pairs'
-Plugin 'YouCompleteMe'
+"Plugin 'YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'STL-Syntax'
 Plugin 'the-NERD-Commenter'
@@ -78,9 +79,9 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 "Plugin 'wookiehangover/jshint.vim'
 Plugin 'tpope/vim-surround'
-Plugin 'ternjs/tern_for_vim'
 Plugin 'myhere/vim-nodejs-complete'
 Plugin 'tpope/vim-repeat'
+Plugin 'vim-airline/vim-airline-themes'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -172,7 +173,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 set background=dark
-colorscheme Chasing_Logic
+colorscheme BlackSea "rainbow_fine_blue Chasing_Logic
 set t_Co=256
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -394,7 +395,7 @@ function! CmdLine(str)
 endfunction
 
 function! SetCursorLine()
-    highlight CursorLine cterm=bold ctermbg=darkblue ctermfg=none guibg=darkred guifg=white
+    highlight CursorLine cterm=bold ctermbg=darkgray ctermfg=none guibg=darkred guifg=white
 endfunction
 call SetCursorLine()
 function! VisualSelection(direction) range
@@ -474,7 +475,7 @@ nnoremap <leader>jd  :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
 nnoremap <leader>je :YcmCompleter GoToDefinition<CR>
 :hi MatchParen ctermbg=DarkGrey ctermfg=white
-:highlight Comment ctermfg=DarkGrey
+:highlight Comment ctermfg=DarkGreen "DarkGrey
 set pastetoggle=<F9>
 nnoremap    o    o<Esc>
 set nowrap
@@ -509,6 +510,9 @@ nmap <F10> :TagbarToggle<CR>
 " vim-airline
 "let g:airline_section_b = '%{getcwd()}'
 let g:airline_section_y = '%{strftime("%T")}'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme='bubblegum'
 
 " a.vim
 execute "set <M-o>=ø"
@@ -517,6 +521,9 @@ map <M-o> :A<CR>
 "the nerd commenter
 "<leader>cc
 "<leader>cn
+
+" Toggle search highlight
+:noremap <F4> :set hlsearch! hlsearch?<CR>
 
 "my custom
 noremap <leader>nn :vertical resize-3<CR>
@@ -529,3 +536,5 @@ noremap <leader>mm :vertical resize+3<CR>
 :nnoremap <Space> i<Space><Esc>
 
 autocmd CompleteDone * pclose
+
+"autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
