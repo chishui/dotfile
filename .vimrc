@@ -67,7 +67,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'auto-pairs'
-"Plugin 'YouCompleteMe'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'STL-Syntax'
@@ -77,11 +76,14 @@ Plugin 'tagbar'
 Plugin 'vim-airline'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
-"Plugin 'wookiehangover/jshint.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'myhere/vim-nodejs-complete'
 Plugin 'tpope/vim-repeat'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+"Plugin 'DoxygenToolkit.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -108,8 +110,6 @@ set relativenumber
 let mapleader = ","
 let g:mapleader = ","
 
-" Fast saving
-nmap <leader>w :w!<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -458,7 +458,6 @@ set clipboard=unnamed
 
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=clang++\ %
-map <F7> :make && ./%:r<CR> 
 
 "< F5> 编译和运行C++  
 map <F5> :call CompileRunGpp()<CR>  
@@ -516,7 +515,9 @@ let g:airline_theme='bubblegum'
 
 " a.vim
 execute "set <M-o>=ø"
-map <M-o> :A<CR>
+"map <M-o> :A<CR>
+" switch between header/source (do not need to use a.vim)
+map <A-o> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 "the nerd commenter
 "<leader>cc
@@ -526,8 +527,8 @@ map <M-o> :A<CR>
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
 "my custom
-noremap <leader>nn :vertical resize-3<CR>
-noremap <leader>mm :vertical resize+3<CR>
+"noremap <leader>nn :vertical resize-3<CR>
+"noremap <leader>mm :vertical resize+3<CR>
 " enter key can change line
 "nnoremap <CR> i<CR><ESC>
 :imap jj <Esc>
@@ -537,4 +538,25 @@ noremap <leader>mm :vertical resize+3<CR>
 
 autocmd CompleteDone * pclose
 
+" Plugin vim-markdown-preview
+let vim_markdown_preview_github=1
+
 "autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+" Fast saving
+nmap<F2> :w<CR>
+imap<F2> <Esc>:w<CR>i
+
+" use for self write express apidoc format api generation
+nmap<F1> :AddDoc<CR>
+
+"================ visual studio like hot key =================
+"commenter
+"execute "set <A-/>=÷"
+"map <A-/> <leader>c 
+nmap / <leader>c 
+
+" goto definition
+execute "set <M-g>=©"
+nmap <M-g> <leader>jd
+"=============== visual studio like hot key end ==============
