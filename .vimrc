@@ -552,9 +552,8 @@ nmap<F1> :AddDoc<CR>
 
 "================ visual studio like hot key =================
 "commenter
-"execute "set <A-/>=÷"
-"map <A-/> <leader>c 
-nmap / <leader>c 
+execute "set <A-/>=÷"
+map <A-/> <leader>c 
 
 " goto definition
 execute "set <M-g>=©"
