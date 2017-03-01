@@ -454,7 +454,11 @@ set number
 
 set cindent
 
-set clipboard=unnamed
+if $TMUX == ''
+    set clipboard^=unnamed
+else
+    set clipboard=unnamed
+endif
 
 au FileType c set makeprg=gcc\ %
 au FileType cpp set makeprg=clang++\ %
@@ -465,7 +469,7 @@ func! CompileRunGpp()
 exec "w"  
 exec "!clear"
 exec "!rm %<"
-exec "!clang++ -g -std=c++11 % -o %<"  
+exec "!clang++ -g -std=c++14 -stdlib=libc++ % -o %<"  
 exec "! ./%<"  
 endfunc  
 
