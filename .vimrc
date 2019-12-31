@@ -1,3 +1,4 @@
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
 "       Amir Salihefendic
@@ -47,12 +48,17 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 set cursorline
+set cursorcolumn
 highlight CursorLine cterm=bold ctermbg=darkblue ctermfg=none guibg=darkred guifg=white
+highlight CursorColumn ctermbg=darkblue ctermfg=none guibg=darkred guifg=white
 
 set autoread
 "ad
 
 set hidden
+
+"code
+set fileencodings=utf-8,gbk,big5
 
 "set mouse=a
 
@@ -83,6 +89,11 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+"Plugin 'mxw/vim-jsx'
+Plugin 'othree/yajs'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'rafi/awesome-vim-colorschemes'
 "Plugin 'DoxygenToolkit.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -93,6 +104,7 @@ set history=700
 " Enable filetype plugins
 filetype on
 filetype plugin on
+filetype plugin indent on
 filetype indent on
 
 
@@ -126,9 +138,6 @@ set wildignore=*.o,*~,*.pyc
 
 "Always show current position
 set ruler
-
-" Height of the command bar
-set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -173,7 +182,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 set background=dark
-colorscheme BlackSea "rainbow_fine_blue Chasing_Logic
+colorscheme gruvbox "BlackSea rainbow_fine_blue Chasing_Logic
 set t_Co=256
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -209,8 +218,8 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
@@ -317,13 +326,13 @@ if has("mac") || has("macunix")
 endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+"func! DeleteTrailingWS()
+  "exe "normal mz"
+  "%s/\s\+$//ge
+  "exe "normal `z"
+"endfunc
+"autocmd BufWrite *.py :call DeleteTrailingWS()
+"autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -395,6 +404,7 @@ function! CmdLine(str)
 endfunction
 
 function! SetCursorLine()
+    highlight Search cterm=NONE ctermfg=grey ctermbg=blue
     highlight CursorLine cterm=bold ctermbg=darkgray ctermfg=none guibg=darkred guifg=white
 endfunction
 call SetCursorLine()
@@ -460,19 +470,14 @@ else
     set clipboard=unnamed
 endif
 
+" source different source file based on file type
+au FileType cpp source ~/.vim/syntax/cpp.vim
+au FileType python source ~/.vim/syntax/python.vim
+
 au FileType c set makeprg=gcc\ %
-au FileType cpp set makeprg=clang++\ %
 
-"< F5> 编译和运行C++  
-map <F5> :call CompileRunGpp()<CR>  
-func! CompileRunGpp()  
-exec "w"  
-exec "!clear"
-exec "!rm %<"
-exec "!clang++ -g -std=c++14 -stdlib=libc++ % -o %<"  
-exec "! ./%<"  
-endfunc  
-
+nnoremap <F6> :exec '! ./%<'<cr>
+nnoremap <F3> :%!astyle<cr>
 nnoremap <buffer> <F8> :exec '!python' shellescape(@%, 1)<cr>
 nnoremap <leader>jd  :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
@@ -485,6 +490,7 @@ set nowrap
 
 " Nerd-tree
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=20
 
 " multi screen
 map <c-j> <c-w>j
@@ -492,13 +498,6 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-"python syntax strengthen
-let python_highlight_all = 1
-
-"YCM
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
 "set error or warning signs
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
@@ -515,13 +514,15 @@ nmap <F10> :TagbarToggle<CR>
 let g:airline_section_y = '%{strftime("%T")}'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme='bubblegum'
+let g:airline_theme='gruvbox' "'luna'
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts = 1
 
-" a.vim
-execute "set <M-o>=ø"
-"map <M-o> :A<CR>
-" switch between header/source (do not need to use a.vim)
-map <A-o> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+:hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+:hi TabLine ctermfg=Blue ctermbg=Yellow
+:hi TabLineSel ctermfg=Red ctermbg=Yellow
+:hi TabLineFill guifg=LightGreen guibg=DarkGreen ctermfg=LightGreen ctermbg=DarkGreen
+
 
 "the nerd commenter
 "<leader>cc
@@ -530,11 +531,6 @@ map <A-o> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 " Toggle search highlight
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
-"my custom
-"noremap <leader>nn :vertical resize-3<CR>
-"noremap <leader>mm :vertical resize+3<CR>
-" enter key can change line
-"nnoremap <CR> i<CR><ESC>
 :imap jj <Esc>
 
 " press space in normal mode to insert a blank space 
@@ -562,4 +558,12 @@ map <A-/> <leader>c
 " goto definition
 execute "set <M-g>=©"
 nmap <M-g> <leader>jd
-"=============== visual studio like hot key end ==============
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <leader>rt :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" YouCompleteMe
+let g:ycm_confirm_extra_conf = 0
+
+" NerdCommenter
+let g:NERDSpaceDelims = 1
