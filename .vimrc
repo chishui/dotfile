@@ -1,4 +1,3 @@
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
 "       Amir Salihefendic
@@ -94,6 +93,9 @@ Plugin 'othree/yajs'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'wuelnerdotexe/vim-enfocado'
+Plugin 'dense-analysis/ale'
 "Plugin 'DoxygenToolkit.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -181,6 +183,7 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
+syntax on
 set background=dark
 colorscheme gruvbox "BlackSea rainbow_fine_blue Chasing_Logic
 set t_Co=256
@@ -514,7 +517,7 @@ nmap <F10> :TagbarToggle<CR>
 let g:airline_section_y = '%{strftime("%T")}'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme='gruvbox' "'luna'
+let g:airline_theme='badwolf' "'luna'
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
 
@@ -546,6 +549,7 @@ let vim_markdown_preview_github=1
 " Fast saving
 nmap<F2> :w<CR>
 imap<F2> <Esc>:w<CR>i
+imap <leader>s <Esc>:w<CR>i
 
 " use for self write express apidoc format api generation
 nmap<F1> :AddDoc<CR>
@@ -567,3 +571,14 @@ let g:ycm_confirm_extra_conf = 0
 
 " NerdCommenter
 let g:NERDSpaceDelims = 1
+
+" NerdTree
+let NERDTreeShowHidden=1
+
+" vim-markdown
+let g:vim_markdown_override_foldtext = 0
+let g:vim_markdown_folding_disabled=1
+
+let g:ale_linters={
+\ 'python': ['pylint'],
+\}
